@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!------ Include the above in your HEAD tag ---------->
     <title>educationBoard</title>
-    <link rel="stylesheet" href="style.css">
 
-    <style>
-    #login-text {
-        color: black;
-        padding: 30px 0 30px 0;
-        text-align: center;
 
-    }
-
-    </style>
 </head>
 <body>
-    <div class="container">
-        <div>
-            <h2 id="login-text"> Signup for Education Board</h2>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <br>
+        <div id="topic">
+            <h1>Signup</h1>
         </div>
         <hr>
-        <div>
+
             <form id="signup-form" action = "/signup" method = "POST">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input id="user" type="text" name = 'username' class="form-control" id="exampleInputEmail1" placeholder="Enter new username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input id="pass" type="text" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
+                    <input id="user-name" type="text" name = 'userfullname' class="form-control" placeholder="Your Full Name">
+                    <input id="user" type="text" name = 'username' class="form-control" placeholder="Enter new username">
+                    <input id="pass" type="text" name='password' class="form-control" placeholder="Create New Password">
+                    
                     <div class="form-group">
                             <label for="exampleFormControlSelect1">Select on of the options below</label>
                             <h6> I am a..</h6>
@@ -42,46 +31,18 @@
                             <input type ='radio' name = 'auth_level' value = '2' required> Teacher <br>
                     
                     </div>
+            <hr>
                     <button id="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
-        </div>
+            <br>
+            <div id="formFooter">
+                    <a class="underlineHover" href="login.html"><spam style="color:darkgray;">Already have an account?</spam> <spam style="color: blue;">Sign In</spam></a>
+            </div>
 
+            </div>
     </div>
 
-    <!-- <script>
-    
-        $('#signup-form').on('submit', signUp);
 
-        function signUp(){
-			event.preventDefault();
-			
-            var un = $("#user input[userName=username]").val();
-            var ps = $('#pass input[password = password_hash]').val();
-            $("#user").empty();
-            $("#pass").empty();
-
-
-			$.ajax({
-				url: '/index.html',
-				method: 'POST',
-                data: {
-                    username : un,
-                    passeord_hash : ps
-                    
-                }
-			}).then(function(res){
-                var what_user_sees = "";
-	    	  if (error){
-	    	  	what_user_sees = 'you need to use a unique email';
-	    	  	// res.send(error)
-	    	  }else{
-	    	  	what_user_sees = 'you have signed up - please go login at the login route';
-	    	  }
-
-	    	  res.send(what_user_sees);
-			});
-		}
-    </script> -->
 </body>
 </html>
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href= "../assets/styles.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+</head>
+
+<body class="container">
+
+
+
+
+    <main>
+        <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-10">
+            <h1>Hello <span style="color: blue;">: <%=data.req.session.userfullname%></span></h1>
+            </div>
+            <div class="col-sm-2">
+            <form action = 'logout'>
+                    <button class="signout-btn" id = 'signOut'> Sign Out</button>
+            </form>
+            </div>
+        </div>
+            <hr>
+        <div class="row">
+            <div class="col-sm-3" id="content-1">
+                <div id="content-left">
+                    <% if(data.req.session.auth_level === undefined) { %>
+                    <p>wrong way</p>
+                    <% } %>
+
+                    <% if((data.req.session.auth_level ==2) || (data.req.session.auth_level ==1)){ %>
+                    <form action='/messagePost' method='post'>
+                        <input type="text" name="comment" placeholder="New Message">
+                        <input type="submit" id='messageCreate' value="Post Message">
+                        <!-- <button id='messageCreate'>Post Message</button> -->
+                        <!-- <button onclick="location.href = 'localhost:3000/checkClass';" id="ClassCheck"
+                            submit-button">Check Class</button> -->
+                    </form>
+
+                    <% } %>
+
+                    <% if(data.req.session.auth_level ==2) { %>
+                    <form action='/insertClass' method='post'>
+                        <input type="text" name="c_name" placeholder="Create New Class">
+                        <input type="submit" id='classCreate' value="Create Class">
+                        <!-- <button id='classCreate'>Create Class</button> -->
+                        <!-- <button onclick="location.href = 'localhost:3000/checkClass';" id="ClassCheck"
+                            submit-button">Check Class</button> -->
+                    </form>
+
+
+                    <form action='/getNameClassId' method='post'>
+                        <input type="text" name="c_name" placeholder="Class">
+                        <input type="text" name="student_class" placeholder="Self/Student">
+                        <input type="submit" id='updateClassStudent' value="Update Student to Class">
+                        <!-- <button id='updateClassStudent'>Update Student to Class</button> -->
+                    </form>
+                    <!-- junk code <h2>Class Results:</h2>  
+                    <% for(var i=0; i<class_results.length; i++) { %>
+                    <p><%= class_results[i].id %> <%= class_results[i].c_name %> <%= class_results[i].user_id %>
+                        <%= class_results[i].class_id %></p>
+                    <% } %>
+                    -->
+                    <br><br>
+                    <% } %>
+
+                    </div>
+                </div>
+            
+
+            <div class="col-sm-9" id="content-2">
+                <div id = 'content-right'>
+                    <ul></ul>
+                </div>
+
+
+            </div>
+ 
+
+            </div>
+
+        </div>
+        <div>
+
+        </div>
+
+    </main>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type = 'text/javascript'>
+            displayComments();
+        
+            function displayComments(){
+                $('ul').empty();
+                $.ajax({
+                    url:'/comments',
+                    method:'GET'
+                }).then(function(res){
+                    for (var i =0; i<res.length; i++){
+                        var li = $('<li>');
+                            li.text(res[i]['comment'])
+                            $('ul').append(li);
+                    }
+                })
+            }
+            </script> -->
+
+</body>
+
+</html>

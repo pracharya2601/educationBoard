@@ -6,6 +6,7 @@ USE educ_db;
 
 CREATE TABLE users ( 
 	id INT NOT NULL AUTO_INCREMENT,
+	userfullname VARCHAR(255) NOT NULL,
 	username VARCHAR(255) UNIQUE NOT NULL,
 	password_hash VARCHAR(255) NOT NULL,
 	auth_level INT NOT NULL,

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href= "../assets/styles.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+</head>
+
+<body class="container">
+
+
+
+
+    <main>
+    <div class="jumbotron">
+
+    <div class="row">
+            <div class="col-sm-10">
+                    <% if(data.req.session.auth_level === undefined) { %>
+                        <p>wrong way, please properly login</p>
+                        <% } %>
+                
+                        <% if(data.req.session.auth_level >=1){ %>
+                
+                        <!-- <h1>Hello <%=data.req.session.username%></h1> -->
+                        <h1>Hello <span style="color: blue;">: <%=data.req.session.username%></span></h1>
+            </div>
+            <div class="col-sm-2">
+            <form action = 'logout'>
+                    <button class="signout-btn" id = 'signOut'> Sign Out</button>
+            </form>
+            </div>
+        </div>
+
+                <% if(data.req.session.auth_level >=1){ %>
+
+
+
+
+                <% if(data.req.session.auth_level >=2) { %>
+                <form action='/insertClass' method='post'>
+                    <input type="text" name="c_name" placeholder="Create New Class">
+                    <!-- <button id='classCreate'>classCreate</button> -->
+
+                    <input class="btn-submit" type="submit" id='classCreate' value="classCreate">
+                    <!-- <button onclick="location.href = 'localhost:3000/checkClass';" id="ClassCheck"
+                            submit-button">Check Class</button> -->
+                </form>
+                <br><br>
+
+
+                <form action='/getNameClassId' method='post'>
+                    <input type="text" name="c_name" placeholder="Class">
+                    <input type="text" name="student_class" placeholder="Self/Student">
+                    <br><br>
+                    <input class="btn-submit" type="submit" id='updateClassStudent' value="Update Student to Class">
+                    <!-- <button id='updateClassStudent'>Update Student to Class</button> -->
+                </form>
+                <br><br>
+                <% } %>
+
+                <!--I have a logic error that if no classes, adds an input text field-->
+                <% if(classList.length ==0){ } else { %>
+                <h2>Enrolled Classes:</h2>
+                <% for(var i=0; i<classList.length; i++) { %>
+                <form action='/msgBoard' method='post'>
+                    <input id=<%= classList[i].c_name %> type="submit" name='clist' value=<%= classList[i].c_name %> />
+                    <% } %>
+                </form>
+
+
+
+
+                <% if(data.req.session.auth_level >=2) { %>
+                <% if(class_results[1].c_name !=null){ %>
+                <h2>Check Attendance:</h2>
+                <% for(var j=0; j<classList.length; j++) { %>
+                <form action='/roster' method='post'>
+                    <input id=<%= classList[j].c_name %> type="submit" name='attendance'
+                        value=<%= classList[j].c_name %> />
+
+                    <% } %>
+                </form>
+
+                <% } %>
+                <% } %>
+
+                <% } %>
+
+
+                <% } %>
+            </div>
+            <div>
+
+            </div>
+
+
+        </div>
+        <% } %>
+
+        <br><br>
+        </div>
+
+
+
+
+
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
