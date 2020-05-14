@@ -53,9 +53,14 @@ exports.login = function(req, res){
          if(results.length){
             req.session.userId = results[0].id;
             req.session.user = results[0];
-            req.session.auth_level = results[0];
+            req.session.auth_level = results[0].auth_level;
             console.log(results[0].id);
-            res.redirect('/home/dashboard');
+            console.log(results[0].auth_level);
+            if(results[0].auth_level === 2) {
+               res.redirect('/home/profile');
+            } else {
+               res.redirect('/home/dashboard');
+            }
          }
          else{
             message = 'Wrong Credentials.';
@@ -68,24 +73,7 @@ exports.login = function(req, res){
    }
            
 };
-//-----------------------------------------------dashboard page functionality----------------------------------------------
-           
-exports.dashboard = function(req, res, next){
-           
-   var user =  req.session.user,
-   userId = req.session.userId;
-   console.log('userid='+userId);
-   if(userId == null){
-      res.redirect("/login");
-      return;
-   }
-
-   var sql="SELECT * FROM `users` WHERE `id`='"+userId+"'";
-
-   connection.query(sql, function(err, results){
-      res.render('dashboard.ejs', {user:user});    
-   });       
-};
+        
 //------------------------------------logout functionality----------------------------------------------
 exports.logout=function(req,res){
    req.session.destroy(function(err) {
@@ -106,6 +94,19 @@ exports.profile = function(req, res){
       res.render('profile.ejs',{data:result});
    });
 };
+
+exports.dashboard = function(req, res, next){     
+   var userId = req.session.userId;
+   if(userId == null){
+      res.redirect("/login");
+      return;
+   }        
+   var sql="SELECT * FROM `users` WHERE `id`='"+userId+"'";          
+   connection.query(sql, function(err, result){  
+      res.render('dashboard.ejs',{data:result});
+   });
+};
+
 // //---------------------------------edit users details after login----------------------------------
 // exports.editprofile=function(req,res){
 //    var userId = req.session.userId;
